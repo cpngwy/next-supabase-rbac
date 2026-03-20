@@ -6,7 +6,7 @@ export async function isAdminForUser(
     .from("profiles")
     .select("role_id")
     .eq("id", userId)
-    .single();
+    .maybeSingle();
 
   if (profileError || !profile?.role_id) return false;
 
@@ -14,7 +14,7 @@ export async function isAdminForUser(
     .from("roles")
     .select("name")
     .eq("id", profile.role_id)
-    .single();
+    .maybeSingle();
 
   if (roleError || !role?.name) return false;
 
